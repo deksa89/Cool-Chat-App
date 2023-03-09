@@ -51,7 +51,7 @@
   margin: 0 10px -10px;
 }
 
-.Message-content > .username {
+.username {
   display: block;
   color: gray;
   font-size: 14px;
