@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import Messages from './components/Messages';
 import Input from './components/Input';
-import NameInput from './components/NameInput';  // POPRAVITI DA INPUT ZA IME RADI
+import NameInput from './components/NameInput';
 import './App.css';
+
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16); 
 }
 
 
-const handleFormSubmit = (myName) => {
-  return myName
-}
-
 class App extends Component {
   
   state = {
     messages: [],
     member: {
-      username: handleFormSubmit(),
+      username: '',
       color: randomColor()
     },
     showChat: false
@@ -60,7 +57,7 @@ class App extends Component {
       return (
         <div className="App">
           <div className='App-header'>
-            <h1>Cool Chat App</h1>
+            <h1>Login to Best Chat App Ever</h1>
             <NameInput onSubmit={this.handleFormSubmit} />
           </div>
         </div>
@@ -70,7 +67,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className='App-header'>
-          <h1>Cool Chat App</h1>
+          <h1>Chat App</h1>
         </div>
         <Messages
           messages={this.state.messages}
