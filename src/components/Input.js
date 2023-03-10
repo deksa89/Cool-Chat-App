@@ -14,8 +14,8 @@ const Input = (props) => {
   }
 
   return (
-    <div className="Input">
-      <form onSubmit={onSubmit}>
+    <div className="input">
+      <form className="message-form" onSubmit={onSubmit}>
         <input
           onChange={onChange}
           value={text}

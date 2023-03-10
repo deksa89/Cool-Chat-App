@@ -8,13 +8,13 @@ const RenderMessage = (props, message, index) => {
     const messageFromMe = member.id === currentMember.id;
   
     const msgClassName = messageFromMe
-      ? "Messages-message currentMember"
-      : "Messages-message";
+      ? "messages-message current_member"
+      : "messages-message";
   
     return (
       <li key={index} className={msgClassName}>
         <span className="avatar" style={{ backgroundColor: member.clientData.color }} />
-        <div className="Message-content">
+        <div className="message-content">
           <div className="username">{member.clientData.username}</div>
           <div className="text">{text}</div>
         </div>

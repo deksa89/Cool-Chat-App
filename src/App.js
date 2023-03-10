@@ -15,7 +15,6 @@ class App extends Component {
   state = {
     messages: [],
     member: {
-      username: '',
       color: randomColor()
     },
     showChat: false
@@ -23,8 +22,14 @@ class App extends Component {
 
   handleFormSubmit = (name) => {
     const member = {...this.state.member}
+    // console.log('member: ', member) // member:  {color: '#727cf6'}
+
     member.username = name;
+    // console.log('member.username: ', member.username) // member.username:  dean
+
     this.setState({member, showChat: true})
+
+
     const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
     this.drone = new window.ScaleDrone(CHANNEL_ID, {
       data: member
@@ -55,8 +60,8 @@ class App extends Component {
   render() {
     if (!this.state.showChat) {
       return (
-        <div className="App">
-          <div className='App-header'>
+        <div className="login__app">
+          <div className='login__app-header'>
             <h1>Login to Best Chat App Ever</h1>
             <NameInput onSubmit={this.handleFormSubmit} />
           </div>
@@ -65,8 +70,8 @@ class App extends Component {
     }
   
     return (
-      <div className="App">
-        <div className='App-header'>
+      <div className="app">
+        <div className='app-header'>
           <h1>Chat App</h1>
         </div>
         <Messages

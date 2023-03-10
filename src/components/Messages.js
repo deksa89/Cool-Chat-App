@@ -6,7 +6,7 @@ const Messages = (props) => {
   const { messages } = props;
 
   return (
-      <ul className="Messages-list">{messages.map((message, index) => RenderMessage(props, message, index))}</ul>
+      <ul className="messages-list">{messages.map((message, index) => RenderMessage(props, message, index))}</ul>
   );
 }
 

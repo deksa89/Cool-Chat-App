@@ -1,0 +1,28 @@
+.login__label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.login__username {
+    padding-right: 1rem;
+}
+
+.login__input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid magenta;
+    flex-grow: 0;
+    height: 27px;
+}
+
+.login__form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    flex-direction: column;
+  }

@@ -1,11 +1,11 @@
-.App {
+.app {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
 }
 
-.App-header {
+.app-header {
   background-color: #353535;
   overflow: visible;
   width: 100%;
@@ -13,7 +13,7 @@
   color: magenta;
 }
 
-.Messages-list {
+.messages-list {
   padding: 20px 0;
   max-width: 900px;
   width: 100%;
@@ -22,28 +22,28 @@
   padding-left: 0;
   flex-grow: 1;
   overflow: auto;
+  background-color: gainsboro;
 }
 
-.Messages-message {
+.messages-message {
   display: flex;
   margin-top: 10px;
 }
 
-.Messages-message.currentMember {
-  /*justify-content: flex-end;*/
+.messages-message.current_member {
   flex-direction: row-reverse;
   text-align: right;
 }
 
-.Message-content {
+.message-content {
   display: inline-block;
 }
 
-.currentMember > .Message-content {
+.current_member > .message-content {
   align-items: flex-end;
 }
 
-.Messages-message > .avatar {
+.messages-message > .avatar {
   height: 35px;
   width: 35px;
   border-radius: 50%;
@@ -58,7 +58,7 @@
   padding-bottom: 4px;
 }
 
-.Message-content > .text {
+.message-content > .text {
   padding: 10px;
   max-width: 400px;
   margin: 0;
@@ -68,11 +68,11 @@
   display: inline-block;
 }
 
-.currentMember > .Message-content .text {
+.current_member > .message-content .text {
   background-color: magenta;
 }
 
-form {
+.message-form {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -83,17 +83,35 @@ form {
 input {
   padding: 5px;
   font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid magenta;
+  border: 1px solid rgb(7, 7, 7);
   flex-grow: 1;
 }
 
 button {
-  padding: 5px 10px;
+  padding: 10px 80px;
   font-size: 16px;
   background-color: magenta;
   color: white;
   border: none;
-  border-radius: 8px;
-  margin-left: 10px;
+}
+
+.login__app {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login__app-header {
+  background-color: #353535;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+  color: magenta;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#root {
+  background-color: #353535;
 }
