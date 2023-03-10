@@ -9,7 +9,6 @@ function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16); 
 }
 
-
 class App extends Component {
   
   state = {
@@ -22,11 +21,7 @@ class App extends Component {
 
   handleFormSubmit = (name) => {
     const member = {...this.state.member}
-    // console.log('member: ', member) // member:  {color: '#727cf6'}
-
     member.username = name;
-    // console.log('member.username: ', member.username) // member.username:  dean
-
     this.setState({member, showChat: true})
 
 
