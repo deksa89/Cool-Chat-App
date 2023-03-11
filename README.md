@@ -1,4 +1,4 @@
-Simple chat app that is using Scaledrone messaging service. 
+Simple chat app that is using React and Scaledrone messaging service. 
 
 It consists of 2 windows: Login and Chat windows.
 
