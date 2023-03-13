@@ -10,7 +10,7 @@ const Input = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setText("");
-    props.onSendMessage(text);
+    props.onSendChatMessage(text);
   }
 
   return (

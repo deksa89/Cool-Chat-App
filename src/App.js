@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import Messages from './components/Messages';
 import Input from './components/Input';
-import NameInput from './components/NameInput';
+import LoginScreen from './components/LoginScreen';
 import './App.css';
 
-
-function randomColor() {
-  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16); 
-}
 
 class App extends Component {
   
   state = {
     messages: [],
     member: {
-      color: randomColor()
     },
     showChat: false
   }
@@ -23,7 +18,6 @@ class App extends Component {
     const member = {...this.state.member}
     member.username = name;
     this.setState({member, showChat: true})
-
 
     const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
     this.drone = new window.ScaleDrone(CHANNEL_ID, {
@@ -53,12 +47,12 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.showChat) {
+    if (this.state.showChat === false) {
       return (
         <div className="login__app">
           <div className='login__app-header'>
             <h1>Login to Best Chat App Ever</h1>
-            <NameInput onSubmit={this.handleFormSubmit} />
+            <LoginScreen onUsernameSubmit={this.handleFormSubmit} />
           </div>
         </div>
       );
@@ -74,7 +68,7 @@ class App extends Component {
           currentMember={this.state.member}
         />
         <Input
-          onSendMessage={this.onSendMessage}
+          onSendChatMessage={this.onSendMessage}
         />
       </div>
     );

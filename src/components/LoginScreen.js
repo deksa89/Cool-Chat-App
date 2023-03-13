@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 
-import './NameInput.css'
+import './LoginScreen.css'
 
-const NameInput = (props) => {
+const LoginScreen = (props) => {
   const [username, setUsername] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    props.onSubmit(username)
+
+    if(username.length < 3) {
+      setShowWarning(true)
+    } else {
+      setSubmitted(true);
+      props.onUsernameSubmit(capitalizeFirstLetter(username))
+    }
   };
 
   const handleInputChange = (event) => {
@@ -32,8 +43,9 @@ const NameInput = (props) => {
           </label>
         </form>
       )}
+      {showWarning && <p>Please enter a username with at least 3 characters.</p>}
     </div>
   );
 };
 
-export default NameInput;
+export default LoginScreen;
