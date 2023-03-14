@@ -1,16 +1,26 @@
 import React from "react";
 import AvatarGroup from 'react-avatar-group';
+//import NewUserMessage from "./NewUserMessage";
 
 const RenderMessage = (props, message, index) => {
     const { member, text } = message;
-    const { currentMember } = props;
-  
+    const { currentMember, showMessage, showChat, messages } = props;
+
     const messageFromMe = member.id === currentMember.id;
-  
-    const msgClassName = messageFromMe
-      ? "messages-message current_member"
+
+    const msgClassName = messageFromMe  // ako je messageFromMe: true onda ce se prikazati poruka od mene na desnoj strani dok ce od drugih korisnika biti na lijevoj
+      ? "messages-message current_member" // to da ispisuje lijevo/desno ovisi o korsiniku je rijeseno u css-u s messages-message current_member/messages-message
       : "messages-message";
- 
+
+    
+      console.log("messages: ", messages)
+      console.log("text: ", messages)
+
+    // console.log("showMessage2: ", showMessage)
+    // console.log("showChat2: ", showChat)
+    // console.log('messages.length', messages.length)
+
+
     return (
       <li key={index} className={msgClassName}>
         <AvatarGroup avatars={[`${member.clientData.username}`]} initialCharacters={1} max={3} size={30} displayAllOnHover shadow={2}/>

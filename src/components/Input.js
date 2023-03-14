@@ -5,12 +5,15 @@ const Input = (props) => {
 
   const onChange = (e) => {
     setText(e.target.value);
+    //console.log(e.target.value) // mjenja se na svaku promjenu/za svako slovo u inputu za unos poruke 
   }
 
   const onSubmit = (e) => {
-    e.preventDefault();
-    setText("");
-    props.onSendChatMessage(text);
+    e.preventDefault(); // sprijecava defaultno ponasanje form submissiona (neophodno kad se radi s single-page aplikacijom)
+    setText("");  // svrha setText je da vrati text da ocisti input field nakon sto je forma submittana
+    // console.log("text: ", text) // setText postaje text na onSubmit
+
+    props.onSendChatMessage(text); // zove funkciju onSendChatMessage koja je proslijedena kao props ovoj komponenti, a text varijabla salje chat poruku serveru
   }
 
   return (

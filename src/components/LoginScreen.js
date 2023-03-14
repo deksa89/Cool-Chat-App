@@ -7,7 +7,6 @@ const LoginScreen = (props) => {
   const [submitted, setSubmitted] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
 
-
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -37,7 +36,7 @@ const LoginScreen = (props) => {
               type="text"
               value={username}
               onChange={handleInputChange}
-              placeholder='Put your username...'
+              placeholder='Write your username...'
             />
             <button type="submit">Submit</button>
           </label>
