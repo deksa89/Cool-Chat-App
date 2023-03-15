@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Messages from './components/Messages';
 import Input from './components/Input';
 import LoginScreen from './components/LoginScreen';
@@ -9,32 +9,9 @@ const App = () => {
   const [member, setMember] = useState({});
   const [showChat, setShowChat] = useState(false);
   const [drone, setDrone] = useState(null);
-  //const [users, setUsers] = useState(false); // postaviti da ispisuje novu poruku kad se novi korisnik pojavi
 
-  //const [showMessage, setShowMessage] = useState(true);
 
-  // useEffect(() => {
-  //   if (showChat && showMessage && messages.length > 0) {
-  //     console.log("This message will appear only once when the component renders for the first time.");
-  //     setShowMessage(false); // Set showMessage to false after the message is shown
-  //   }
-  // }, [showChat, messages.length, showMessage]);
-
-  
-  // useEffect(() => {
-    //   if (showChat) {
-      //     setUsers(true);
-      //     console.log('new user!!!')
-      
-      //     let novi = 'new user has entered chat'
-      //   }
-      // }, [showChat]);
-      
-
-  // console.log('showchat: ', showChat)
-  // console.log('showMessage: ', showMessage)
-  // console.log('messages: ', messages)
-  // console.log('users: ', users)
+///////////////// STARI KOD BEZ POZDRAVNE PORUKE ////////////////////////////
 
   const handleFormSubmit = (name) => {
     const memberCopy = { ...member };
@@ -69,13 +46,18 @@ const App = () => {
     setDrone(drone);
   };
 
+////////////////////NOVI KOD ZA PRIKAZ NOVOG USERA///////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
   const onSendMessage = (message) => {
     drone.publish({
       room: 'observable-room',
       message,
     });
   };
-
   
   if (showChat === false) {
     return (
@@ -93,7 +75,7 @@ const App = () => {
       <div className="app-header">
         <h1>Chat App</h1>
       </div>
-      <Messages messages={messages} currentMember={member} showChat={showChat} />
+      <Messages messages={messages} currentMember={member} />
       <Input onSendChatMessage={onSendMessage} />
     </div>
   );

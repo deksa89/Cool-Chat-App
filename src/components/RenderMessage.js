@@ -4,7 +4,7 @@ import AvatarGroup from 'react-avatar-group';
 
 const RenderMessage = (props, message, index) => {
     const { member, text } = message;
-    const { currentMember, showMessage, showChat, messages } = props;
+    const { currentMember } = props;
 
     const messageFromMe = member.id === currentMember.id;
 
@@ -13,19 +13,19 @@ const RenderMessage = (props, message, index) => {
       : "messages-message";
 
     
-      console.log("messages: ", messages)
-      console.log("text: ", messages)
+      // console.log("messages: ", messages)
+      // console.log("text: ", messages)
 
-    // console.log("showMessage2: ", showMessage)
+    //console.log("member.id: ", member.id)
     // console.log("showChat2: ", showChat)
     // console.log('messages.length', messages.length)
 
 
     return (
       <li key={index} className={msgClassName}>
-        <AvatarGroup avatars={[`${member.clientData.username}`]} initialCharacters={1} max={3} size={30} displayAllOnHover shadow={2}/>
+        {/* <AvatarGroup avatars={[`${member.clientData.username}`]} initialCharacters={1} max={3} size={30} displayAllOnHover shadow={2}/> */}
         <div className="message-content">
-          <div className="username">{member.clientData.username}</div>
+          {/* <div className="username">{member.clientData.username}</div> */}
           <div className="text">{text}</div>
         </div>
       </li>
