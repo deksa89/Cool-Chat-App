@@ -8,5 +8,4 @@ First you gotta write your username...
 
 Once you write your username application will take you to chat window...
 
-![Screenshot from 2023-03-13 13-29-38](https://user-images.githubusercontent.com/89583742/224702473-d776cd87-2463-47be-9565-b92575241f9f.png)
-
+![Screenshot from 2023-03-16 13-17-41](https://user-images.githubusercontent.com/89583742/225615316-baf733c4-ada2-4b84-87ed-37c9961f1466.png)
