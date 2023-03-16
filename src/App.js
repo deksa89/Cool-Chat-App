@@ -11,46 +11,42 @@ const App = () => {
   const [drone, setDrone] = useState(null);
 
 
-///////////////// STARI KOD BEZ POZDRAVNE PORUKE ////////////////////////////
+const handleFormSubmit = (name) => {
+  const memberCopy = { ...member };
+  memberCopy.username = name;
+  
+  setMember(memberCopy);
+  setShowChat(true);
 
-  const handleFormSubmit = (name) => {
+  const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
+  const drone = new window.ScaleDrone(CHANNEL_ID, {
+    data: memberCopy,
+  });
+
+  drone.on('open', (error) => {
+    if (error) return console.error(error);
+
     const memberCopy = { ...member };
-    memberCopy.username = name;
-    
+    memberCopy.id = drone.clientId;
     setMember(memberCopy);
-    setShowChat(true);
 
-
-    const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
-    const drone = new window.ScaleDrone(CHANNEL_ID, {
-      data: memberCopy,
+    // Publish a message when a new user joins
+    drone.publish({
+      room: 'observable-room',
+      message: `${name} has joined the chat`,
     });
+  });
 
-    drone.on('open', (error) => {
-      if (error) return console.error(error);
+  const room = drone.subscribe('observable-room');
+  room.on('data', (data, member) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { member, text: data },
+    ]);
+  });
 
-      const memberCopy = { ...member };
-    
-      memberCopy.id = drone.clientId;
-      setMember(memberCopy);
-    });
-
-    const room = drone.subscribe('observable-room');
-    room.on('data', (data, member) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { member, text: data },
-      ]);
-    });
-
-    setDrone(drone);
-  };
-
-////////////////////NOVI KOD ZA PRIKAZ NOVOG USERA///////////////////////////////
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
+  setDrone(drone);
+};
 
   const onSendMessage = (message) => {
     drone.publish({
