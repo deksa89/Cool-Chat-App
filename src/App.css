@@ -43,6 +43,15 @@
   display: inline-block;
 }
 
+.message-content_chatbot {
+  display: flex;
+}
+
+.chatbot-text {
+  margin-left: 22rem;
+  color: grey;
+}
+
 .current_member > .message-content {
   align-items: flex-end;
 }

@@ -1,78 +1,80 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Messages from './components/Messages';
 import Input from './components/Input';
 import LoginScreen from './components/LoginScreen';
 import './App.css';
 
+const App = () => {
+  const [messages, setMessages] = useState([]);
+  const [member, setMember] = useState({});
+  const [showChat, setShowChat] = useState(false);
+  const [drone, setDrone] = useState(null);
 
-class App extends Component {
+
+const handleFormSubmit = (name) => {
+  const memberCopy = { ...member };
+  memberCopy.username = name;
   
-  state = {
-    messages: [],
-    member: {
-    },
-    showChat: false
-  }
+  setMember(memberCopy);
+  setShowChat(true);
 
-  handleFormSubmit = (name) => {
-    const member = {...this.state.member}
-    member.username = name;
-    this.setState({member, showChat: true})
+  const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
+  const drone = new window.ScaleDrone(CHANNEL_ID, {
+    data: memberCopy,
+  });
 
-    const CHANNEL_ID = 'qqxtR1YAPcD40c4W';
-    this.drone = new window.ScaleDrone(CHANNEL_ID, {
-      data: member
-    });
+  drone.on('open', (error) => {
+    if (error) return console.error(error);
 
-    this.drone.on('open', error => {
-      if (error) return console.error(error);
+    const memberCopy = { ...member };
+    memberCopy.id = drone.clientId;
+    setMember(memberCopy);
 
-      const member = {...this.state.member};
-      member.id = this.drone.clientId;
-      this.setState({member});
-    });
-    const room = this.drone.subscribe('observable-room');
-    room.on('data', (data, member) => {
-      const messages = this.state.messages;
-      messages.push({member, text: data});
-      this.setState({messages});
-    });
-  }
-
-  onSendMessage = (message) => {
-    this.drone.publish({
+    // Publish a message when a new user joins
+    drone.publish({
       room: 'observable-room',
-      message
+      message: `${name} has joined the chat`,
     });
-  }
+  });
 
-  render() {
-    if (this.state.showChat === false) {
-      return (
-        <div className="login__app">
-          <div className='login__app-header'>
-            <h1>Login to Best Chat App Ever</h1>
-            <LoginScreen onUsernameSubmit={this.handleFormSubmit} />
-          </div>
-        </div>
-      );
-    }
+  const room = drone.subscribe('observable-room');
+  room.on('data', (data, member) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { member, text: data },
+    ]);
+  });
+
+  setDrone(drone);
+};
+
+  const onSendMessage = (message) => {
+    drone.publish({
+      room: 'observable-room',
+      message,
+    });
+  };
   
+  if (showChat === false) {
     return (
-      <div className="app">
-        <div className='app-header'>
-          <h1>Chat App</h1>
+      <div className="login__app">
+        <div className="login__app-header">
+          <h1>Login to Best Chat App Ever</h1>
+          <LoginScreen onUsernameSubmit={handleFormSubmit} />
         </div>
-        <Messages
-          messages={this.state.messages}
-          currentMember={this.state.member}
-        />
-        <Input
-          onSendChatMessage={this.onSendMessage}
-        />
       </div>
     );
   }
+
+  return (
+    <div className="app">
+      <div className="app-header">
+        <h1>Chat App</h1>
+      </div>
+      <Messages messages={messages} currentMember={member} />
+      <Input onSendChatMessage={onSendMessage} />
+    </div>
+  );
 }
 
 export default App;
