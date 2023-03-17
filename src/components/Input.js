@@ -54,6 +54,7 @@ const Input = (props) => {
 
   const handleEmojiClick = (emojiObject) => {
     setText((prevMsg)=> prevMsg + emojiObject.emoji)
+    setShowPicker(false)
   };
 
   return (
